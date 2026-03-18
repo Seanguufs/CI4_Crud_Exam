@@ -9,21 +9,9 @@ $subsegment = service('uri')->getSegment(2);
         <span style="font-weight: 700; font-size: 1.15rem; letter-spacing: -0.02em;">Jurado</span>
     </a>
     
-<?php 
-$role = session('user')['role'] ?? 'guest'; 
-$segment = service('uri')->getSegment(1); 
-$subsegment = service('uri')->getSegment(2);
-?>
-<aside class="sidebar-wrapper" style="background-color: #000000; border-right: 1px solid rgba(255,255,255,0.05); border-radius: 0;">
-    <a href="<?= base_url() ?>" class="d-flex align-items-center text-white text-decoration-none px-4 py-4 mb-2">
-        <i class="bi bi-fan me-2" style="font-size: 1.25rem; color: #818cf8; animation: spin 4s linear infinite;"></i> 
-        <span style="font-weight: 700; font-size: 1.15rem; letter-spacing: -0.02em;">Jurado</span>
-    </a>
-    
     <nav class="sidebar-nav px-3">
 
         <?php if ($role === 'admin'): ?>
-        <!-- ═══ ADMIN ═══ -->
         <div class="nav-group-title mt-2 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">Main</div>
         <a href="<?= base_url('dashboard') ?>" class="nav-item-link <?= $segment === 'dashboard' ? 'active' : '' ?>">
             <i class="bi bi-grid-1x2<?= $segment === 'dashboard' ? '-fill' : '' ?>"></i> Dashboard
@@ -44,13 +32,12 @@ $subsegment = service('uri')->getSegment(2);
         <a href="<?= base_url('admin/users') ?>" class="nav-item-link <?= ($segment === 'admin' && $subsegment === 'users') ? 'active' : '' ?>">
             <i class="bi bi-person-bounding-box"></i> User Management
         </a>
-        <div class="nav-group-title mt-4 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">No Access (Demo)</div>
+        <div class="nav-group-title mt-4 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">Restricted</div>
         <a href="<?= base_url('student/dashboard') ?>" class="nav-item-link nav-item-locked">
             <i class="bi bi-house-door"></i> Student Dashboard <i class="bi bi-lock-fill ms-auto" style="font-size:0.7rem;"></i>
         </a>
 
         <?php elseif ($role === 'teacher'): ?>
-        <!-- ═══ TEACHER ═══ -->
         <div class="nav-group-title mt-2 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">Main</div>
         <a href="<?= base_url('dashboard') ?>" class="nav-item-link <?= $segment === 'dashboard' ? 'active' : '' ?>">
             <i class="bi bi-grid-1x2<?= $segment === 'dashboard' ? '-fill' : '' ?>"></i> Dashboard
@@ -64,7 +51,7 @@ $subsegment = service('uri')->getSegment(2);
         <a href="<?= base_url('profile/edit') ?>" class="nav-item-link <?= ($segment === 'profile' && $subsegment === 'edit') ? 'active' : '' ?>">
             <i class="bi bi-sliders2"></i> Edit Profile
         </a>
-        <div class="nav-group-title mt-4 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">No Access (Demo)</div>
+        <div class="nav-group-title mt-4 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">Restricted</div>
         <a href="<?= base_url('student/dashboard') ?>" class="nav-item-link nav-item-locked">
             <i class="bi bi-house-door"></i> Student Dashboard <i class="bi bi-lock-fill ms-auto" style="font-size:0.7rem;"></i>
         </a>
@@ -76,7 +63,6 @@ $subsegment = service('uri')->getSegment(2);
         </a>
 
         <?php elseif ($role === 'coordinator'): ?>
-        <!-- ═══ COORDINATOR ═══ -->
         <div class="nav-group-title mt-2 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">Main</div>
         <a href="<?= base_url('dashboard') ?>" class="nav-item-link <?= $segment === 'dashboard' ? 'active' : '' ?>">
             <i class="bi bi-grid-1x2<?= $segment === 'dashboard' ? '-fill' : '' ?>"></i> Dashboard
@@ -90,7 +76,7 @@ $subsegment = service('uri')->getSegment(2);
         <a href="<?= base_url('profile/edit') ?>" class="nav-item-link <?= ($segment === 'profile' && $subsegment === 'edit') ? 'active' : '' ?>">
             <i class="bi bi-sliders2"></i> Edit Profile
         </a>
-        <div class="nav-group-title mt-4 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">No Access (Demo)</div>
+        <div class="nav-group-title mt-4 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">Restricted</div>
         <a href="<?= base_url('student/dashboard') ?>" class="nav-item-link nav-item-locked">
             <i class="bi bi-house-door"></i> Student Dashboard <i class="bi bi-lock-fill ms-auto" style="font-size:0.7rem;"></i>
         </a>
@@ -102,7 +88,6 @@ $subsegment = service('uri')->getSegment(2);
         </a>
 
         <?php else: ?>
-        <!-- ═══ STUDENT ═══ -->
         <div class="nav-group-title mt-2 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">Main</div>
         <a href="<?= base_url('student/dashboard') ?>" class="nav-item-link <?= $segment === 'student' ? 'active' : '' ?>">
             <i class="bi bi-house-door<?= $segment === 'student' ? '-fill' : '' ?>"></i> Dashboard
@@ -113,7 +98,7 @@ $subsegment = service('uri')->getSegment(2);
         <a href="<?= base_url('profile/edit') ?>" class="nav-item-link <?= ($segment === 'profile' && $subsegment === 'edit') ? 'active' : '' ?>">
             <i class="bi bi-sliders2"></i> Edit Profile
         </a>
-        <div class="nav-group-title mt-4 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">No Access (Demo)</div>
+        <div class="nav-group-title mt-4 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">Restricted</div>
         <a href="<?= base_url('dashboard') ?>" class="nav-item-link nav-item-locked">
             <i class="bi bi-grid-1x2"></i> Dashboard <i class="bi bi-lock-fill ms-auto" style="font-size:0.7rem;"></i>
         </a>
@@ -140,8 +125,8 @@ $subsegment = service('uri')->getSegment(2);
                 <div class="text-truncate" style="font-size: 0.65rem; font-weight: 700; color: #34d399; text-transform: uppercase; letter-spacing: 0.05em;"><span style="color: #10b981; margin-right: 4px;">●</span> <?= esc($role) ?></div>
             </div>
         </div>
-        <a href="<?= base_url('logout') ?>" class="nav-item-link text-decoration-none px-3 d-flex align-items-center gap-2 rounded" style="color: #a1a1aa; transition: all 0.2s;" onmouseover="this.style.color='#fb7185'; this.style.background='rgba(2fb,113,133,0.05)'" onmouseout="this.style.color='#a1a1aa'; this.style.background='transparent'">
-            <i class="bi bi-power"></i> Terminate Session
+        <a href="<?= base_url('logout') ?>" class="nav-item-link text-decoration-none px-3 d-flex align-items-center gap-2 rounded" style="color: #a1a1aa; transition: all 0.2s;" onmouseover="this.style.color='#fb7185';" onmouseout="this.style.color='#a1a1aa';">
+            <i class="bi bi-power"></i> Sign Out
         </a>
     </div>
 </aside>
@@ -151,6 +136,8 @@ $subsegment = service('uri')->getSegment(2);
     display: flex; align-items: center; gap: 0.75rem;
     padding: 0.6rem 1rem; border-radius: 8px;
     font-size: 0.9rem; font-weight: 500;
+    color: #a1a1aa;
+    text-decoration: none;
     transition: all 0.2s;
     margin-bottom: 0.25rem;
 }
