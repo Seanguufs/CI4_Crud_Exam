@@ -19,6 +19,9 @@ $subsegment = service('uri')->getSegment(2);
         <a href="<?= base_url('students') ?>" class="nav-item-link <?= $segment === 'students' ? 'active' : '' ?>">
             <i class="bi bi-people<?= $segment === 'students' ? '-fill' : '' ?>"></i> Students
         </a>
+        <a href="<?= base_url('student/dashboard') ?>" class="nav-item-link <?= $segment === 'student' ? 'active' : '' ?>">
+            <i class="bi bi-house-door<?= $segment === 'student' ? '-fill' : '' ?>"></i> Student Dashboard
+        </a>
         <a href="<?= base_url('profile') ?>" class="nav-item-link <?= ($segment === 'profile' && empty($subsegment)) ? 'active' : '' ?>">
             <i class="bi bi-person-vcard<?= ($segment === 'profile' && empty($subsegment)) ? '-fill' : '' ?>"></i> My Profile
         </a>
@@ -31,10 +34,6 @@ $subsegment = service('uri')->getSegment(2);
         </a>
         <a href="<?= base_url('admin/users') ?>" class="nav-item-link <?= ($segment === 'admin' && $subsegment === 'users') ? 'active' : '' ?>">
             <i class="bi bi-person-bounding-box"></i> User Management
-        </a>
-        <div class="nav-group-title mt-4 mb-2 px-3 text-uppercase" style="font-size: 0.65rem; font-weight: 700; color: #4b5563; letter-spacing: 0.1em;">Restricted</div>
-        <a href="<?= base_url('student/dashboard') ?>" class="nav-item-link nav-item-locked">
-            <i class="bi bi-house-door"></i> Student Dashboard <i class="bi bi-lock-fill ms-auto" style="font-size:0.7rem;"></i>
         </a>
 
         <?php elseif ($role === 'teacher'): ?>
@@ -125,7 +124,7 @@ $subsegment = service('uri')->getSegment(2);
                 <div class="text-truncate" style="font-size: 0.65rem; font-weight: 700; color: #34d399; text-transform: uppercase; letter-spacing: 0.05em;"><span style="color: #10b981; margin-right: 4px;">●</span> <?= esc($role) ?></div>
             </div>
         </div>
-        <a href="<?= base_url('logout') ?>" class="nav-item-link text-decoration-none px-3 d-flex align-items-center gap-2 rounded" style="color: #a1a1aa; transition: all 0.2s;" onmouseover="this.style.color='#fb7185';" onmouseout="this.style.color='#a1a1aa';">
+        <a href="<?= base_url('logout') ?>" class="nav-item-link px-3 d-flex align-items-center gap-2 rounded" style="color: #a1a1aa;" onmouseover="this.style.color='#fb7185';" onmouseout="this.style.color='#a1a1aa';">
             <i class="bi bi-power"></i> Sign Out
         </a>
     </div>
