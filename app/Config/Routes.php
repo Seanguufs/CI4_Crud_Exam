@@ -20,8 +20,8 @@ $routes->group('', ['filter' => ['auth', 'student']], function ($routes) {
     $routes->get('student/dashboard', 'StudentController::dashboard');
 });
 
-// ── Profile Routes (filter: ['auth']) — accessible by all logged-in roles ───
-$routes->group('', ['filter' => 'auth'], function ($routes) {
+// ── Profile Routes (filter: auth|student) — student only per access matrix ─
+$routes->group('', ['filter' => ['auth', 'student']], function ($routes) {
     $routes->get('profile',         'ProfileController::show');
     $routes->get('profile/edit',    'ProfileController::edit');
     $routes->post('profile/update', 'ProfileController::update');

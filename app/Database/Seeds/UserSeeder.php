@@ -11,10 +11,10 @@ use CodeIgniter\Database\Seeder;
  *
  * | Role        | Email                  | Password  |
  * |-------------|------------------------|-----------|
- * | admin       | admin@school.edu       | Password1 |
- * | teacher     | teacher@school.edu     | Password1 |
- * | student     | student@school.edu     | Password1 |
- * | coordinator | coordinator@school.edu | Password1 |
+ * | admin       | admin@school.edu.ph       | Password1 |
+ * | teacher     | teacher@school.edu.ph     | Password1 |
+ * | student     | student@school.edu.ph     | Password1 |
+ * | coordinator | coordinator@school.edu.ph | Password1 |
  */
 class UserSeeder extends Seeder
 {
@@ -29,10 +29,10 @@ class UserSeeder extends Seeder
         };
 
         $this->db->table('users')->insertBatch([
-            ['fullname' => 'Admin',       'username' => 'admin@school.edu',       'password' => $hash, 'role' => 1, 'role_id' => $getRoleId('admin'),       'created_at' => $now, 'updated_at' => $now],
-            ['fullname' => 'Cruz',         'username' => 'teacher@school.edu',     'password' => $hash, 'role' => 1, 'role_id' => $getRoleId('teacher'),     'created_at' => $now, 'updated_at' => $now],
-            ['fullname' => 'Reyes',        'username' => 'student@school.edu',     'password' => $hash, 'role' => 1, 'role_id' => $getRoleId('student'),     'created_at' => $now, 'updated_at' => $now],
-            ['fullname' => 'Bautista',     'username' => 'coordinator@school.edu', 'password' => $hash, 'role' => 1, 'role_id' => $getRoleId('coordinator'), 'created_at' => $now, 'updated_at' => $now],
+            ['fullname' => 'Admin',       'username' => 'admin@school.edu.ph',       'password' => $hash, 'role' => 1, 'role_id' => $getRoleId('admin'),       'created_at' => $now, 'updated_at' => $now],
+            ['fullname' => 'Cruz',         'username' => 'teacher@school.edu.ph',     'password' => $hash, 'role' => 1, 'role_id' => $getRoleId('teacher'),     'created_at' => $now, 'updated_at' => $now],
+            ['fullname' => 'Reyes',        'username' => 'student@school.edu.ph',     'password' => $hash, 'role' => 1, 'role_id' => $getRoleId('student'),     'created_at' => $now, 'updated_at' => $now],
+            ['fullname' => 'Bautista',     'username' => 'coordinator@school.edu.ph', 'password' => $hash, 'role' => 1, 'role_id' => $getRoleId('coordinator'), 'created_at' => $now, 'updated_at' => $now],
         ]);
     }
 }

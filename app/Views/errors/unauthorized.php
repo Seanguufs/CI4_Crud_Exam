@@ -1,37 +1,48 @@
 <!doctype html>
-<html lang="en" style="background-color: #09090b;">
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>403 Unauthorized | EduPanel</title>
+    <title>403 Unauthorized — RBAC</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="<?= base_url('assets/css/premium.css') ?>">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'DM Sans', sans-serif; background: #fafaf8; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+        .card { background: #fff; border: 1px solid #e8e6e0; border-radius: 20px; padding: 56px 48px; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+        .icon-wrap { width: 80px; height: 80px; border-radius: 20px; background: #fdf2f1; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; font-size: 2.2rem; color: #c0392b; }
+        h1 { font-size: 1.6rem; font-weight: 800; color: #1a1916; letter-spacing: -0.03em; margin-bottom: 8px; }
+        .code { font-size: 0.75rem; font-weight: 700; color: #9c9a94; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+        p { font-size: 0.9rem; color: #6b6860; line-height: 1.7; margin-bottom: 28px; }
+        .role-pill { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 28px; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 10px; font-size: 0.875rem; font-weight: 700; text-decoration: none; font-family: inherit; transition: all 0.2s; }
+        .btn-primary { background: #1a1916; color: #fff; }
+        .btn-primary:hover { background: #2d2b26; transform: translateY(-1px); }
+        .divider { width: 40px; height: 3px; background: #e8e6e0; border-radius: 2px; margin: 0 auto 28px; }
+    </style>
 </head>
-<body class="d-flex align-items-center justify-content-center vh-100" style="background-color: #09090b;">
-    <div class="text-center">
-        <div class="mb-4" style="color: #fb7185;">
-            <i class="bi bi-shield-lock-fill" style="font-size: 5rem; filter: drop-shadow(0 0 20px rgba(251,113,133,0.4));"></i>
-        </div>
-        
-        <h1 style="font-size: 2.5rem; font-weight: 800; color: #f8fafc; letter-spacing: -0.03em; margin-bottom: 0.5rem;">403 Access Denied</h1>
-        <p style="color: #9ca3af; font-size: 1.1rem; max-width: 450px; margin: 0 auto 2rem;">
-            You are currently logged in as a <strong><span style="color: #6366f1; text-transform: uppercase; font-size: 0.9em; letter-spacing: 0.05em;"><?= esc(session('user')['role'] ?? 'Guest') ?></span></strong>. 
-            This account does not have the necessary permissions to view this system segment.
-        </p>
-
-        <?php 
-            $dashboardLink = base_url('login');
-            if (session()->has('user')) {
-                $role = session('user')['role'] ?? '';
-                if ($role === 'student') $dashboardLink = base_url('student/dashboard');
-                elseif (in_array($role, ['teacher', 'admin', 'coordinator'])) $dashboardLink = base_url('dashboard');
-            }
-        ?>
-
-        <a href="<?= $dashboardLink ?>" class="clean-btn-primary d-inline-flex align-items-center justify-content-center text-decoration-none px-4 py-2" style="font-weight: 600;">
-            <i class="bi bi-arrow-left me-2"></i> Return to Safety
-        </a>
-    </div>
+<body>
+<?php
+$role = session('user')['role'] ?? '';
+$roleColor = match($role) { 'admin'=>'#c0392b','teacher'=>'#2d7a4f','coordinator'=>'#b45309',default=>'#2563a8' };
+$roleBg    = match($role) { 'admin'=>'#fdf2f1','teacher'=>'#edf7f1','coordinator'=>'#fef9ee',default=>'#eef4fc' };
+$dashLink  = match($role) { 'student'=>base_url('student/dashboard'), default=>base_url('dashboard') };
+if (!session()->has('user')) $dashLink = base_url('login');
+?>
+<div class="card">
+    <div class="icon-wrap"><i class="bi bi-shield-x"></i></div>
+    <div class="code">Error 403</div>
+    <h1>Access Denied</h1>
+    <div class="divider"></div>
+    <?php if ($role): ?>
+    <span class="role-pill" style="background:<?= $roleBg ?>;color:<?= $roleColor ?>;border:1px solid <?= $roleColor ?>30;">
+        Logged in as: <?= esc($role) ?>
+    </span>
+    <?php endif; ?>
+    <p>You don't have permission to view this page. This area requires a different access level than your current role.</p>
+    <a href="<?= $dashLink ?>" class="btn btn-primary">
+        <i class="bi bi-arrow-left"></i> Back to Dashboard
+    </a>
+</div>
 </body>
 </html>

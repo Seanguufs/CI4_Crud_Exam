@@ -1,107 +1,78 @@
 <?= $this->extend('layouts/main') ?>
-<?= $this->section('breadcrumb') ?>
-<div class="row align-items-center">
-    <div class="col-sm-6">
-        <h3 class="mb-0 fw-bold"><i class="bi bi-people me-2 text-success"></i>Student Management</h3>
-    </div>
-    <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-end mb-0">
-            <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Home</a></li>
-            <li class="breadcrumb-item active">Students</li>
-        </ol>
-    </div>
-</div>
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
-<div class="d-flex align-items-center justify-content-between mb-4">
-    <h3 class="fw-bold mb-0"><i class="bi bi-people me-2 text-success"></i>Student Management</h3>
-    <span class="badge bg-success px-3 py-2">
-        <i class="bi bi-person-badge me-1"></i>Teacher / Admin View
-    </span>
+
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:28px;flex-wrap:wrap;">
+    <div>
+        <h2 style="font-size:1.4rem;font-weight:800;color:#1a1916;letter-spacing:-0.02em;margin:0 0 4px;">Student Management</h2>
+        <p style="font-size:0.875rem;color:#9c9a94;margin:0;">All users with the student role.</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+        <span style="background:#edf7f1;color:#2d7a4f;border:1px solid #b7e4ca;padding:5px 14px;border-radius:20px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">
+            <i class="bi bi-person-badge me-1"></i>Teacher View
+        </span>
+        <input type="text" id="searchInput" placeholder="Search student..."
+               style="background:#f5f4f0;border:1.5px solid #e8e6e0;border-radius:9px;padding:7px 14px;font-size:0.875rem;font-family:inherit;color:#1a1916;outline:none;width:200px;"
+               onfocus="this.style.borderColor='#d4622a';this.style.background='#fff'"
+               onblur="this.style.borderColor='#e8e6e0';this.style.background='#f5f4f0'">
+    </div>
 </div>
 
-<div class="card border-0 shadow-sm">
-    <div class="card-header bg-white border-bottom d-flex align-items-center justify-content-between py-3">
-        <h6 class="fw-bold mb-0 text-muted">
-            <i class="bi bi-table me-2"></i>All Enrolled Students
-            <span class="badge bg-success ms-2"><?= count($students) ?></span>
-        </h6>
-        <input type="text" id="searchInput" class="form-control form-control-sm w-auto"
-               placeholder="🔍 Search student..." style="min-width:200px;">
+<div style="background:#fff;border:1px solid #e8e6e0;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+    <div style="padding:14px 20px;border-bottom:1px solid #f5f4f0;display:flex;align-items:center;gap:10px;">
+        <i class="bi bi-table" style="color:#9c9a94;"></i>
+        <span style="font-size:0.875rem;font-weight:700;color:#1a1916;">Enrolled Students</span>
+        <span style="background:#f5f4f0;color:#6b6860;padding:2px 10px;border-radius:20px;font-size:0.72rem;font-weight:700;"><?= count($students) ?></span>
     </div>
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0" id="studentTable">
-                <thead class="table-dark">
-                    <tr>
-                        <th class="ps-4">#</th>
-                        <th>Name</th>
-                        <th>Student ID</th>
-                        <th>Course</th>
-                        <th>Year & Section</th>
-                        <th>Email</th>
-                        <th class="text-center pe-4">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (empty($students)): ?>
-                    <tr>
-                        <td colspan="7" class="text-center text-muted py-5">
-                            <i class="bi bi-inbox fs-3 d-block mb-2"></i>No students found.
-                        </td>
-                    </tr>
-                    <?php else: ?>
-                    <?php foreach ($students as $i => $s): ?>
-                    <tr>
-                        <td class="ps-4 text-muted small"><?= $i + 1 ?></td>
-                        <td>
-                            <div class="d-flex align-items-center gap-2">
-                                <?php if (!empty($s['profile_image'])): ?>
-                                    <img src="<?= base_url('uploads/profiles/' . esc($s['profile_image'])) ?>"
-                                         class="rounded-circle border" style="width:36px;height:36px;object-fit:cover;" alt="">
-                                <?php else: ?>
-                                    <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center
-                                                justify-content-center border border-primary"
-                                         style="width:36px;height:36px;flex-shrink:0;">
-                                        <i class="bi bi-person-fill text-primary small"></i>
-                                    </div>
-                                <?php endif; ?>
-                                <span class="fw-semibold"><?= esc($s['name']) ?></span>
+    <div class="table-responsive">
+        <table class="rbac-table" id="studentTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Joined</th>
+                    <th style="text-align:center;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($students)): ?>
+                <tr>
+                    <td colspan="5" style="text-align:center;padding:48px 20px;color:#9c9a94;">
+                        <i class="bi bi-inbox" style="font-size:2rem;display:block;margin-bottom:8px;"></i>
+                        No students found.
+                    </td>
+                </tr>
+                <?php else: ?>
+                <?php foreach ($students as $i => $s): ?>
+                <tr>
+                    <td style="color:#9c9a94;"><?= $i + 1 ?></td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div style="width:34px;height:34px;border-radius:50%;background:#eef4fc;border:1px solid #bdd5f0;display:flex;align-items:center;justify-content:center;color:#2563a8;flex-shrink:0;">
+                                <i class="bi bi-person-fill" style="font-size:0.9rem;"></i>
                             </div>
-                        </td>
-                        <td class="text-muted small"><?= esc($s['student_id'] ?? '—') ?></td>
-                        <td>
-                            <?php if ($s['course']): ?>
-                            <span class="badge bg-primary bg-opacity-10 text-primary fw-normal">
-                                <?= esc($s['course']) ?>
-                            </span>
-                            <?php else: ?>
-                            <span class="text-muted small">—</span>
-                            <?php endif; ?>
-                        </td>
-                        <td class="small">
-                            <?= $s['year_level'] ? 'Year ' . $s['year_level'] : '' ?>
-                            <?= $s['section'] ? ' — ' . esc($s['section']) : '' ?>
-                            <?= (!$s['year_level'] && !$s['section']) ? '—' : '' ?>
-                        </td>
-                        <td class="text-muted small"><?= esc($s['email']) ?></td>
-                        <td class="text-center pe-4">
-                            <a href="<?= base_url('/students/show/' . $s['id']) ?>"
-                               class="btn btn-sm btn-outline-success">
-                                <i class="bi bi-eye me-1"></i>View
-                            </a>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+                            <span style="font-weight:600;color:#1a1916;"><?= esc($s['name']) ?></span>
+                        </div>
+                    </td>
+                    <td style="font-size:0.875rem;color:#6b6860;"><?= esc($s['email']) ?></td>
+                    <td style="font-size:0.82rem;color:#9c9a94;"><?= isset($s['created_at']) ? date('M j, Y', strtotime($s['created_at'])) : '—' ?></td>
+                    <td style="text-align:center;">
+                        <a href="<?= base_url('/students/show/' . $s['id']) ?>"
+                           style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;background:#edf7f1;color:#2d7a4f;border:1px solid #b7e4ca;font-size:0.8rem;font-weight:600;text-decoration:none;transition:all 0.15s;"
+                           onmouseover="this.style.background='#2d7a4f';this.style.color='#fff'"
+                           onmouseout="this.style.background='#edf7f1';this.style.color='#2d7a4f'">
+                            <i class="bi bi-eye"></i> View
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
     </div>
 </div>
-<?= $this->endSection() ?>
 
+<?= $this->endSection() ?>
 <?= $this->section('javascript') ?>
 <script>
 document.getElementById('searchInput').addEventListener('keyup', function () {

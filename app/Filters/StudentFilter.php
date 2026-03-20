@@ -11,7 +11,7 @@ class StudentFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         $role = session('user')['role'] ?? '';
-        if (! in_array($role, ['student', 'admin'], true)) {
+        if ($role !== 'student') {
             return redirect()->to('/unauthorized');
         }
     }

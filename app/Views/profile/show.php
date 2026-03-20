@@ -1,98 +1,62 @@
 <?= $this->extend('layouts/main') ?>
-
-<?= $this->section('breadcrumb') ?>
-<!-- Handled by topbar -->
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
-<div class="row g-4 pb-4">
-    <!-- Left Column: Quick Profile Info -->
-    <div class="col-lg-4">
-        <div class="clean-card mb-4 border-0 shadow-md-clean" style="background: rgba(24, 24, 27, 0.4); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);">
-            <div class="p-4 d-flex flex-column align-items-center text-center">
-                <?php if (!empty($user['profile_image'])): ?>
-                    <img src="<?= base_url('uploads/profiles/' . esc($user['profile_image'])) ?>" alt="Profile" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--border-light); box-shadow: 0 8px 16px rgba(0,0,0,0.5); margin-bottom: 1.25rem;">
-                <?php else: ?>
-                    <div style="width: 120px; height: 120px; border-radius: 50%; background-color: rgba(255,255,255,0.05); color: var(--text-secondary); display: flex; justify-content: center; align-items: center; border: 4px solid var(--border-light); box-shadow: 0 8px 16px rgba(0,0,0,0.5); margin-bottom: 1.25rem; backdrop-filter: blur(10px);">
-                        <i class="bi bi-person-fill" style="font-size: 3.5rem;"></i>
-                    </div>
-                <?php endif; ?>
-                
-                <h5 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; letter-spacing: -0.02em;"><?= esc($user['fullname']) ?></h5>
-                <p style="font-size: 0.9rem; color: var(--accent-hover); font-weight: 500; margin-bottom: 1.25rem;">@<?= esc($user['username']) ?></p>
-                <div class="px-3 py-1 mb-4" style="background: rgba(255,255,255,0.08); border-radius: 20px; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase;">
-                    <?= esc(session('user')['role'] ?? 'Student') ?>
-                </div>
-                
-                <a href="<?= base_url('profile/edit') ?>" class="clean-btn-primary w-100 text-decoration-none text-center">Edit Profile</a>
+
+<div style="display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:start;">
+
+    <!-- Left: Profile Card -->
+    <div style="background:#fff;border:1px solid #e8e6e0;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <div style="height:80px;background:linear-gradient(135deg,#1a1916 0%,#2d2b26 100%);"></div>
+        <div style="padding:0 24px 24px;text-align:center;margin-top:-44px;">
+            <div style="width:88px;height:88px;border-radius:50%;background:#f5f4f0;border:4px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,0.12);display:flex;align-items:center;justify-content:center;color:#9c9a94;margin:0 auto 14px;">
+                <i class="bi bi-person-fill" style="font-size:2.8rem;"></i>
             </div>
-            
-            <div class="border-top border-light p-4" style="background-color: rgba(0,0,0,0.2);">
-                <div class="d-flex justify-content-between mb-3">
-                    <span style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 500;">Joined Date</span>
-                    <span style="font-size: 0.85rem; color: var(--text-primary); font-weight: 600;"><?= isset($user['created_at']) ? date('M Y', strtotime($user['created_at'])) : 'Unknown' ?></span>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 500;">Status</span>
-                    <span class="text-emerald-600" style="font-size: 0.85rem; font-weight: 700;"><i class="bi bi-circle-fill me-1" style="font-size: 0.5rem; text-shadow: 0 0 10px rgba(52, 211, 153, 0.8);"></i> Active</span>
-                </div>
+            <h5 style="font-size:1.05rem;font-weight:800;color:#1a1916;margin:0 0 4px;letter-spacing:-0.02em;"><?= esc($user['fullname']) ?></h5>
+            <p style="font-size:0.82rem;color:#9c9a94;margin:0 0 14px;">@<?= esc($user['username']) ?></p>
+            <span style="background:#f5f4f0;color:#6b6860;padding:4px 14px;border-radius:20px;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;display:inline-block;margin-bottom:18px;">
+                <?= esc(session('user')['role'] ?? 'Student') ?>
+            </span>
+            <a href="<?= base_url('profile/edit') ?>" class="clean-btn-primary" style="width:100%;justify-content:center;">
+                <i class="bi bi-pencil"></i> Edit Profile
+            </a>
+        </div>
+        <div style="border-top:1px solid #f5f4f0;padding:16px 24px;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:0.82rem;color:#9c9a94;font-weight:500;">Joined</span>
+                <span style="font-size:0.82rem;color:#1a1916;font-weight:600;"><?= isset($user['created_at']) ? date('M Y', strtotime($user['created_at'])) : 'Unknown' ?></span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:0.82rem;color:#9c9a94;font-weight:500;">Status</span>
+                <span style="font-size:0.82rem;color:#2d7a4f;font-weight:700;display:flex;align-items:center;gap:5px;">
+                    <i class="bi bi-circle-fill" style="font-size:0.45rem;"></i> Active
+                </span>
             </div>
         </div>
     </div>
-    
-    <!-- Right Column: Data Tables -->
-    <div class="col-lg-8">
-        <div class="clean-card mb-4 border-0 shadow-md-clean" style="background: rgba(24, 24, 27, 0.4); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);">
-            <div class="p-4 border-bottom border-light" style="background-color: rgba(255, 255, 255, 0.02);">
-                <h6 class="mb-0 text-emerald-600" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;"><i class="bi bi-mortarboard me-2"></i>Academic Record</h6>
-            </div>
-            <div class="p-0 table-responsive border-0">
-                <table class="table mb-0 border-0" style="font-size: 0.9rem;">
-                    <tbody>
-                        <tr>
-                            <td class="px-4 py-3 border-bottom text-muted fw-medium" style="width: 30%; border-color: var(--border-light) !important; background: transparent;">Student ID</td>
-                            <td class="px-4 py-3 border-bottom fw-bold text-dark" style="border-color: var(--border-light) !important; background: transparent;"><?= esc($user['student_id'] ?? 'Not Set') ?></td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-3 border-bottom text-muted fw-medium" style="border-color: var(--border-light) !important; background: transparent;">Course/Program</td>
-                            <td class="px-4 py-3 border-bottom fw-bold text-dark" style="border-color: var(--border-light) !important; background: transparent;"><?= esc($user['course'] ?? 'Not Set') ?></td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-3 border-bottom text-muted fw-medium" style="border-color: var(--border-light) !important; background: transparent;">Year Level</td>
-                            <td class="px-4 py-3 border-bottom fw-bold text-dark" style="border-color: var(--border-light) !important; background: transparent;"><?= esc($user['year_level'] ?? 'Not Set') ?></td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-3 border-bottom-0 text-muted fw-medium" style="background: transparent;">Section</td>
-                            <td class="px-4 py-3 border-bottom-0 fw-bold text-dark" style="background: transparent;"><?= esc($user['section'] ?? 'Not Set') ?></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+
+    <!-- Right: Account Info -->
+    <div style="background:#fff;border:1px solid #e8e6e0;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <div style="padding:14px 20px;border-bottom:1px solid #f5f4f0;display:flex;align-items:center;gap:8px;">
+            <i class="bi bi-person-vcard-fill" style="color:#2563a8;"></i>
+            <span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#2563a8;">Account Details</span>
         </div>
-        
-        <div class="clean-card border-0 shadow-md-clean" style="background: rgba(24, 24, 27, 0.4); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);">
-            <div class="p-4 border-bottom border-light" style="background-color: rgba(255, 255, 255, 0.02);">
-                <h6 class="mb-0 text-indigo-600" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;"><i class="bi bi-person-vcard me-2"></i>Contact Details</h6>
-            </div>
-            <div class="p-0 table-responsive border-0">
-                <table class="table mb-0 border-0" style="font-size: 0.9rem;">
-                    <tbody>
-                        <tr>
-                            <td class="px-4 py-3 border-bottom text-muted fw-medium" style="width: 30%; border-color: var(--border-light) !important; background: transparent;">Email Address</td>
-                            <td class="px-4 py-3 border-bottom fw-bold text-dark" style="border-color: var(--border-light) !important; background: transparent;"><?= esc($user['email']) ?></td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-3 border-bottom text-muted fw-medium" style="border-color: var(--border-light) !important; background: transparent;">Phone Number</td>
-                            <td class="px-4 py-3 border-bottom fw-bold text-dark" style="border-color: var(--border-light) !important; background: transparent;"><?= esc($user['phone'] ?? 'Not Set') ?></td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-3 border-bottom-0 text-muted fw-medium" style="background: transparent;">Home Address</td>
-                            <td class="px-4 py-3 border-bottom-0 fw-bold text-dark" style="background: transparent;"><?= nl2br(esc($user['address'] ?? 'Not Set')) ?></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <table style="width:100%;border-collapse:collapse;">
+            <tbody>
+                <tr>
+                    <td style="padding:14px 20px;font-size:0.82rem;font-weight:600;color:#9c9a94;width:180px;border-bottom:1px solid #f5f4f0;">Full Name</td>
+                    <td style="padding:14px 20px;font-size:0.875rem;font-weight:600;color:#1a1916;border-bottom:1px solid #f5f4f0;"><?= esc($user['fullname']) ?></td>
+                </tr>
+                <tr>
+                    <td style="padding:14px 20px;font-size:0.82rem;font-weight:600;color:#9c9a94;border-bottom:1px solid #f5f4f0;">Username / Email</td>
+                    <td style="padding:14px 20px;font-size:0.875rem;font-weight:600;color:#1a1916;border-bottom:1px solid #f5f4f0;"><?= esc($user['username']) ?></td>
+                </tr>
+                <tr>
+                    <td style="padding:14px 20px;font-size:0.82rem;font-weight:600;color:#9c9a94;">Role</td>
+                    <td style="padding:14px 20px;font-size:0.875rem;font-weight:600;color:#1a1916;text-transform:capitalize;"><?= esc(session('user')['role'] ?? '—') ?></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+
 </div>
+
 <?= $this->endSection() ?>

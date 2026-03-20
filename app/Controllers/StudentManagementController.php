@@ -27,8 +27,7 @@ class StudentManagementController extends BaseController
     public function index()
     {
         $students = $this->db->table('users u')
-            ->select('u.id, u.fullname AS name, u.username AS email, u.student_id,
-                      u.course, u.year_level, u.section, u.created_at, u.profile_image')
+            ->select('u.id, u.fullname AS name, u.username AS email, u.created_at')
             ->join('roles r', 'r.id = u.role_id', 'left')
             ->where('r.name', 'student')
             ->orderBy('u.fullname', 'ASC')

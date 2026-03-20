@@ -16,8 +16,6 @@ class UserModel extends Model
 
     protected $allowedFields = [
         'fullname', 'username', 'password', 'role', 'role_id',
-        'student_id', 'course', 'year_level', 'section',
-        'phone', 'address', 'profile_image',
     ];
 
     protected $returnType = 'array';
@@ -50,8 +48,7 @@ class UserModel extends Model
     public function getAllWithRoles(): array
     {
         return $this->db->table('users u')
-            ->select('u.id, u.fullname AS name, u.username AS email, u.student_id,
-                      u.course, u.year_level, u.section, u.profile_image,
+            ->select('u.id, u.fullname AS name, u.username AS email,
                       u.role_id, u.created_at,
                       r.name AS role_name, r.label AS role_label')
             ->join('roles r', 'r.id = u.role_id', 'left')

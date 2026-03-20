@@ -8,8 +8,6 @@ class UserManagement extends Migration
 {
     public function up()
     {
-        $this->forge->createDatabase('starterpanel', true);
-
         // Create menu categories table
         $this->forge->addField([
             'id'          => [

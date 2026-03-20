@@ -80,8 +80,8 @@ class Auth extends BaseController
 
     public function forbiddenPage()
     {
-        $data = array_merge($this->data, ['title' => 'Forbidden Page']);
-        return view('pages/commons/forbidden', $data);
+        $data = array_merge($this->data, ['title' => 'Forbidden']);
+        return response()->setStatusCode(403)->setBody(view('pages/commons/forbidden', $data));
     }
 
     public function register()
@@ -94,7 +94,7 @@ class Auth extends BaseController
         if (! $this->validate([
             'inputRole'      => ['label' => 'Role',                  'rules' => 'required|in_list[admin,teacher,coordinator,student]'],
             'inputVerify'    => ['label' => 'Verification',          'rules' => 'required'],
-            'inputEmail'     => ['label' => 'Email',                 'rules' => 'required|valid_email|is_unique[users.username]'],
+            'inputEmail'     => ['label' => 'Email',                 'rules' => 'required|valid_email|is_unique[users.username]|regex_match[/^[^@]+@school\.edu\.ph$/]'],
             'inputPassword'  => ['label' => 'Password',              'rules' => 'required|min_length[6]'],
             'inputPassword2' => ['label' => 'Password Confirmation',  'rules' => 'required|matches[inputPassword]'],
         ])) {

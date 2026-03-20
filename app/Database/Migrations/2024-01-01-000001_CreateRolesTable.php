@@ -21,7 +21,6 @@ class CreateRolesTable extends Migration
             'updated_at' => ['type' => 'DATETIME', 'null' => true],
         ]);
         $this->forge->addPrimaryKey('id');
-        $this->forge->addUniqueKey('name');
         $this->forge->createTable('roles');
     }
 
