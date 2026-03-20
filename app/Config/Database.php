@@ -29,7 +29,11 @@ class Database extends Config
         'hostname'     => 'localhost',
         'username'     => 'root',
         'password'     => '',
+<<<<<<< HEAD
         'database'     => 'ci4_crud_exam',
+=======
+        'database'     => 'adminpanel',
+>>>>>>> 9ba83627075c63629f030a4305e2abafb941156b
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,

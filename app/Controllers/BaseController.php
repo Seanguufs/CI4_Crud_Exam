@@ -42,7 +42,11 @@ abstract class BaseController extends Controller
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
      */
+<<<<<<< HEAD
     protected $session, $segment, $validation, $encrypter, $ApplicationModel, $db, $data = [];
+=======
+    protected $session, $segment, $validation, $encrypter, $ApplicationModel, $data = [];
+>>>>>>> 9ba83627075c63629f030a4305e2abafb941156b
     /**
      * @return void
      */
@@ -58,6 +62,7 @@ abstract class BaseController extends Controller
         $this->validation       = \Config\Services::validation();
         $this->encrypter        = \Config\Services::encrypter();
         $this->ApplicationModel = new ApplicationModel();
+<<<<<<< HEAD
         $this->db               = \Config\Database::connect();
 
         // Support both new RBAC session and legacy session
@@ -80,6 +85,21 @@ abstract class BaseController extends Controller
             'subsegment'   => $subsegment,
             'user'         => $user,
             'MenuCategory' => $this->ApplicationModel->getAccessMenuCategory(session()->get('role') ?? 1),
+=======
+
+        $user    = $this->ApplicationModel->getUser(username: session()->get('username'));
+        $segment = $this->segment->getSegment(1);
+        if ($segment) {
+            $subsegment = $this->segment->getSegment(2);
+        } else {
+            $subsegment = '';
+        }
+        $this->data = [
+            'segment'        => $segment,
+            'subsegment'     => $subsegment,
+            'user'           => $user,
+            'MenuCategory'   => $this->ApplicationModel->getAccessMenuCategory(session()->get('role'))
+>>>>>>> 9ba83627075c63629f030a4305e2abafb941156b
         ];
     }
 }

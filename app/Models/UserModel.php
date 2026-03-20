@@ -6,6 +6,7 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
+<<<<<<< HEAD
     protected $table      = 'users';
     protected $primaryKey = 'id';
 
@@ -57,6 +58,20 @@ class UserModel extends Model
     }
 
     /** Thin wrapper used by ProfileController. */
+=======
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+    protected $useTimestamps = true;
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
+    
+    protected $allowedFields = [
+        'fullname', 'username', 'password', 'role',
+        'student_id', 'course', 'year_level',
+        'section', 'phone', 'address', 'profile_image',
+    ];
+
+>>>>>>> 9ba83627075c63629f030a4305e2abafb941156b
     public function updateProfile(int $userId, array $data): bool
     {
         return $this->update($userId, $data);

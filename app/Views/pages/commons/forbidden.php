@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
@@ -17,3 +18,9 @@
 </div>
 
 <?= $this->endSection() ?>
+=======
+<?= $this->extend('layouts/main'); ?>
+<?= $this->section('content'); ?>
+<h1>Forbidden Page!</h1>
+<?= $this->endSection(); ?>
+>>>>>>> 9ba83627075c63629f030a4305e2abafb941156b

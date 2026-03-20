@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateStudentsTable extends Migration
+class CreateExamUsersTable extends Migration
 {
     public function up()
     {
@@ -17,43 +17,29 @@ class CreateStudentsTable extends Migration
             ],
             'name' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => 255,
             ],
             'email' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => 255,
                 'unique'     => true,
             ],
-            'course' => [
+            'password' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '50',
+                'constraint' => 255,
             ],
-<<<<<<< HEAD
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
             ],
-            'updated_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('students');
+        $this->forge->createTable('exam_users');
     }
-=======
-            'created_at DATETIME DEFAULT CURRENT_TIMESTAMP',
-        ]);
-
-        $this->forge->addKey('id', true);
-        if (!$this->db->tableExists('students')) 
-    $this->forge->createTable('students');
-}
->>>>>>> 9ba83627075c63629f030a4305e2abafb941156b
 
     public function down()
     {
-        $this->forge->dropTable('students');
+        $this->forge->dropTable('exam_users');
     }
 }

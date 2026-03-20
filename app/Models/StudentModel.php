@@ -21,13 +21,18 @@ class StudentModel extends Model
     protected array $castHandlers = [];
 
     // Dates
+<<<<<<< HEAD
     protected $useTimestamps = true;
+=======
+    protected $useTimestamps = false;
+>>>>>>> 9ba83627075c63629f030a4305e2abafb941156b
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
     // Validation
+<<<<<<< HEAD
     protected $validationRules      = [
         'name'  => 'required|min_length[3]|max_length[100]',
         'email' => 'required|valid_email|is_unique[students.email,id,{id}]',
@@ -47,6 +52,10 @@ class StudentModel extends Model
             'required' => 'Course is required',
         ],
     ];
+=======
+    protected $validationRules      = [];
+    protected $validationMessages   = [];
+>>>>>>> 9ba83627075c63629f030a4305e2abafb941156b
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
